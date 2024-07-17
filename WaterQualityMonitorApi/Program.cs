@@ -1,9 +1,11 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using WaterQualityMonitorApi.Database;
 using WaterQualityMonitorApi.Models.Authentication;
 using WaterQualityMonitorApi.Models.Configuration;
 using WaterQualityMonitorApi.Models.Permissions;
@@ -12,6 +14,11 @@ using WaterQualityMonitorApi.V1.Login;
 using WaterQualityMonitorApi.V1.Test;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connStr = builder.Configuration.GetConnectionString("WaterMonitorDb");
+builder.Services.AddDbContext<WaterMonitorDbContext>(options => {
+    options.UseMySql(connStr, MariaDbServerVersion.AutoDetect(connStr));
+});
 
 builder.Services.AddApiVersioning(options => {
     options.DefaultApiVersion = new ApiVersion(1, 0);

@@ -5,9 +5,7 @@ namespace WaterQualityMonitorApi.Database;
 
 public class WaterMonitorDbContext : DbContext {
 
-	public WaterMonitorDbContext() {
-
-	}
+	public WaterMonitorDbContext(DbContextOptions<WaterMonitorDbContext> options) : base(options) {}
 	
 	public virtual DbSet<User> Users { get; set; }
 	public virtual DbSet<Device> Devices { get; set; }
