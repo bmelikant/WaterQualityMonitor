@@ -12,6 +12,8 @@ public class User {
 	public string Password { get; set; } = "";
 	[MaxLength(320)]
 	public string EmailAddress { get; set; } = "";
+	public bool ActiveUser { get; set; } = false;
 
 	public virtual ICollection<Device> Devices { get; set; } = new List<Device>();
+	public virtual ICollection<Permission> Permissions { get; set; } = new List<Permission>();
 }

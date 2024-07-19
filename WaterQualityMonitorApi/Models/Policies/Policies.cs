@@ -6,7 +6,7 @@ namespace WaterQualityMonitorApi.Models.Policies;
 public static class PolicyExtensions {
 	public static void AddActiveSubscriptionPolicy(this AuthorizationOptions options) {
 		options.AddPolicy(
-			WaterQualityMonitorPolicies.ActiveSubscriptionPolicy, 
+			WaterQualityMonitorPolicies.ActiveSubscription, 
 			policy => policy.RequireClaim(WaterQualityMonitorClaimTypes.ActiveSubscription, "true")
 		);
 	}

@@ -6,11 +6,15 @@ namespace WaterQualityMonitorApi.Models.Permissions;
 
 public static class Permissions {
 	public const string API_Access = "API_ACCESS";
+	public const string API_AdminRead = "API_READ_ADMIN";
+	public const string API_AdminWrite = "API_WRITE_ADMIN";
 }
 
 public static class PermissionsPolicyExtensions {
 	public static void AddPermissions(this AuthorizationOptions options) {
 		options.AddPolicy(Permissions.API_Access, policy => policy.AddRequirements(new PermissionRequirement(Permissions.API_Access)));
+		options.AddPolicy(Permissions.API_AdminRead, policy => policy.AddRequirements(new PermissionRequirement(Permissions.API_AdminRead)));
+		options.AddPolicy(Permissions.API_AdminWrite, policy => policy.AddRequirements(new PermissionRequirement(Permissions.API_AdminWrite)));
 	}
 }
 
