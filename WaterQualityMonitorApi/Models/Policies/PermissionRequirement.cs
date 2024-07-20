@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using WaterQualityMonitorApi.Database;
 using WaterQualityMonitorApi.Models.Authentication;
 using WaterQualityMonitorApi.Models.Constants;
 
@@ -24,6 +26,12 @@ public class PermissionRequirement : IAuthorizationRequirement {
 }
 
 public class PermissionRequirementHandler : AuthorizationHandler<PermissionRequirement> {
+
+	private readonly WaterMonitorDbContext _dbContext;
+	public PermissionRequirementHandler(WaterMonitorDbContext dbContext) {
+		_dbContext = dbContext;
+	}
+
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
     protected override async Task HandleRequirementAsync(
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -33,11 +41,17 @@ public class PermissionRequirementHandler : AuthorizationHandler<PermissionRequi
 		
 		var username = context.User?.Identity?.Name ?? "";
 		if (string.IsNullOrWhiteSpace(username)) throw new Exception("Could not determine username");
-		var user = UserRepository.FindWithoutPassword(username);
+		var user = await _dbContext.Users
+			.Include(user => user.Permissions)
+			.Where(user => user.UserName == username)
+			.FirstOrDefaultAsync();
 
 		if (user is null) throw new Exception($"Unable to locate user {username}");
 
-		if (user.Permissions.Contains(permissionRequirement.PermissionName)) {
+		if (user.Permissions
+			.Select(p => p.PermissionName)
+			.Contains(permissionRequirement.PermissionName)
+		) {
 			context.Succeed(permissionRequirement);
 		}
 	}

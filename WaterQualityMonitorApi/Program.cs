@@ -10,6 +10,7 @@ using WaterQualityMonitorApi.Models.Authentication;
 using WaterQualityMonitorApi.Models.Configuration;
 using WaterQualityMonitorApi.Models.Permissions;
 using WaterQualityMonitorApi.Models.Policies;
+using WaterQualityMonitorApi.V1.Admin;
 using WaterQualityMonitorApi.V1.Login;
 using WaterQualityMonitorApi.V1.Test;
 
@@ -76,6 +77,7 @@ app.UseHttpsRedirection();
 
 app.MapGroup("/api")
     .AddLoginEndpoints()
-    .AddTestEndpoints();
+    .AddTestEndpoints()
+    .AddAdminEndpoints();
 
 app.Run();

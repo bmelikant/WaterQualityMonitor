@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WaterQualityMonitorApi.Database;
 using WaterQualityMonitorApi.Database.Models;
 using WaterQualityMonitorApi.Models.Authentication;
@@ -13,6 +14,19 @@ public static class AdminEndpointExtensions {
 
 		var adminRouteGroup = routeGroupBuilder.MapGroup("/admin")
 			.RequireAuthorization(Permissions.API_Access);
+
+		adminRouteGroup.MapGet("/users", async (
+			[FromServices] WaterMonitorDbContext dbContext
+		) => {
+
+			var usersList = await dbContext.Users
+				.Select(user => new AddUserResponseDTO {
+					Id = user.Id,
+					UserName = user.UserName
+				}).ToListAsync();
+
+			return Results.Json(usersList);
+		});
 
 		adminRouteGroup.MapPost("/users/add", async (
 			[FromServices] WaterMonitorDbContext dbContext,
@@ -41,8 +55,7 @@ public static class AdminEndpointExtensions {
 		.WithOpenApi()
 		.WithName("AddNewUser")
 		.Produces<AddUserResponseDTO>(statusCode: 201)
-		//.RequireAuthorization(Permissions.API_AdminWrite)
-		;
+		.RequireAuthorization(Permissions.API_AdminWrite);
 
 		return routeGroupBuilder;
 	}
