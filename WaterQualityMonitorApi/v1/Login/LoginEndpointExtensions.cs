@@ -10,7 +10,10 @@ public static class LoginEndpointExtensions {
 
 	public static RouteGroupBuilder AddLoginEndpoints(this RouteGroupBuilder routeGroup) {
 		
-		routeGroup.MapPost("/login/user", async (
+		var loginRouteGroup = routeGroup.MapGroup("/login")
+			.WithTags("Login");
+
+		loginRouteGroup.MapPost("/login/user", async (
 			[FromServices] ILoggerFactory loggerFactory,
 			[FromServices] WaterMonitorDbContext dbContext,
 			UserLoginRequestDTO loginDTO, 
@@ -39,13 +42,14 @@ public static class LoginEndpointExtensions {
 		.Produces<UserLoginResponseDTO>()
 		.WithName("UserLogin");
 
-		routeGroup.MapPost("/login/device", (
+		loginRouteGroup.MapPost("/login/device", (
 
 		) => {
 
 		})
 		.WithOpenApi()
-		.Produces<DeviceLoginResponseDTO>();
+		.Produces<DeviceLoginResponseDTO>()
+		.WithName("DeviceLogin");
 
 		return routeGroup;
 	}

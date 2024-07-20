@@ -13,6 +13,7 @@ public static class AdminEndpointExtensions {
 	public static RouteGroupBuilder AddAdminEndpoints(this RouteGroupBuilder routeGroupBuilder) {
 
 		var adminRouteGroup = routeGroupBuilder.MapGroup("/admin")
+			.WithTags("Administrative")
 			.RequireAuthorization(Permissions.API_Access);
 
 		adminRouteGroup.MapGet("/users", async (
@@ -26,7 +27,10 @@ public static class AdminEndpointExtensions {
 				}).ToListAsync();
 
 			return Results.Json(usersList);
-		});
+		})
+		.WithOpenApi()
+		.WithName("GetUsersList")
+		.Produces<IEnumerable<AddUserResponseDTO>>();
 
 		adminRouteGroup.MapPost("/users/add", async (
 			[FromServices] WaterMonitorDbContext dbContext,

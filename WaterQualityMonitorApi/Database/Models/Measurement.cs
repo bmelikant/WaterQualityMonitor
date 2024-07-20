@@ -12,4 +12,5 @@ public class Measurement {
 	public double Value { get; set; }
 
 	public virtual Device Device { get; set; } = null!;
+	public virtual MeasurementType Type { get; set; } = null!;
 }
