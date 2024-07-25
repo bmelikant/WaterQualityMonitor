@@ -14,7 +14,7 @@ public static class AdminEndpointExtensions {
 
 		var adminRouteGroup = routeGroupBuilder.MapGroup("/admin")
 			.WithTags("Administrative")
-			.RequireAuthorization(Permissions.API_Access);
+			.RequireAuthorization(policy => policy.RequirePermission(Permissions.API_Access));
 
 		adminRouteGroup.MapGet("/users", async (
 			[FromServices] WaterMonitorDbContext dbContext
@@ -59,7 +59,7 @@ public static class AdminEndpointExtensions {
 		.WithOpenApi()
 		.WithName("AddNewUser")
 		.Produces<AddUserResponseDTO>(statusCode: 201)
-		.RequireAuthorization(Permissions.API_AdminWrite);
+		.RequireAuthorization(policy => policy.RequirePermission(Permissions.API_AdminWrite));
 
 		return routeGroupBuilder;
 	}

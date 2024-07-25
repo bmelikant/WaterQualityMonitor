@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaterQualityMonitorApi", "WaterQualityMonitorApi\WaterQualityMonitorApi.csproj", "{097AAFE4-8777-46F1-B823-DC4B4962BBB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaterMonitorSimple", "WaterMonitorSimple\WaterMonitorSimple.csproj", "{EC890B57-3437-48C1-8069-2FBF4B6B50D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{097AAFE4-8777-46F1-B823-DC4B4962BBB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{097AAFE4-8777-46F1-B823-DC4B4962BBB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{097AAFE4-8777-46F1-B823-DC4B4962BBB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC890B57-3437-48C1-8069-2FBF4B6B50D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC890B57-3437-48C1-8069-2FBF4B6B50D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC890B57-3437-48C1-8069-2FBF4B6B50D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC890B57-3437-48C1-8069-2FBF4B6B50D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

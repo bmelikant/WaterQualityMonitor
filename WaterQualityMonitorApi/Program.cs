@@ -75,7 +75,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGroup("/api")
+app.MapGroup("/v1")
     .AddLoginEndpoints()
     .AddTestEndpoints()
     .AddAdminEndpoints();
