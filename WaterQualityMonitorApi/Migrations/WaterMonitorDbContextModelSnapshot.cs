@@ -34,7 +34,7 @@ namespace WaterQualityMonitorApi.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("PermissionUser");
+                    b.ToTable("PermissionUser", (string)null);
                 });
 
             modelBuilder.Entity("WaterQualityMonitorApi.Database.Models.Device", b =>
@@ -62,7 +62,7 @@ namespace WaterQualityMonitorApi.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Devices");
+                    b.ToTable("Devices", (string)null);
                 });
 
             modelBuilder.Entity("WaterQualityMonitorApi.Database.Models.Measurement", b =>
@@ -86,7 +86,7 @@ namespace WaterQualityMonitorApi.Migrations
 
                     b.HasIndex("DeviceId");
 
-                    b.ToTable("Measurements");
+                    b.ToTable("Measurements", (string)null);
                 });
 
             modelBuilder.Entity("WaterQualityMonitorApi.Database.Models.Permission", b =>
@@ -103,7 +103,7 @@ namespace WaterQualityMonitorApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Permission");
+                    b.ToTable("Permission", (string)null);
                 });
 
             modelBuilder.Entity("WaterQualityMonitorApi.Database.Models.User", b =>
@@ -134,7 +134,7 @@ namespace WaterQualityMonitorApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("PermissionUser", b =>

@@ -1,0 +1,16 @@
+﻿@page
+@model MyApp.Namespace.LoginModel
+@{
+}
+
+<form asp-page="/Login" onsubmit="onSubmitLogin">
+	Username: <input type="text" name="userName" value="" />
+	Password: <input type="password" name="password" value="" />
+</form>
+
+<script type="text/javascript">
+	const onSubmitLogin = function(e) {
+		e.preventDefault;
+		debugger;
+	}
+</script>
